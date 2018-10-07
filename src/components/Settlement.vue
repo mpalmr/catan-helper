@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<img :src="imgSrc" :alt="imgAlt">
+		<img :src="imgSrc" :alt="settlementText">
 
 		<button @click="toggleIsCity">
-			{{ toggleIsCityText }}
+			{{ settlementText }}
 		</button>
 
 		<button @click="addResource">
@@ -21,6 +21,8 @@
 
 <script>
 import Resource from './Resource.vue';
+import townImage from '../assets/town.png';
+import cityImage from '../assets/city.png';
 
 export default {
 	name: 'settlement',
@@ -50,17 +52,12 @@ export default {
 	},
 
 	computed: {
-		toggleIsCityText() {
+		settlementText() {
 			return this.isCity ? 'City' : 'Town';
 		},
 
 		imgSrc() {
-			const img = this.isCity ? 'city' : 'town';
-			return `/assets/${img}.png`;
-		},
-
-		imgAlt() {
-			return this.isCity ? 'City' : 'Town';
+			return this.isCity ? cityImage : townImage;
 		},
 	},
 
@@ -72,5 +69,8 @@ export default {
 
 
 <style lang="scss" scoped>
-
+img {
+	width: 5rem;
+	height: 5rem;
+}
 </style>

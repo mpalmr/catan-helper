@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-		<ul v-for="settlement in settlements" :key="settlement.id">
-			<li>
+		<ul>
+			<li v-for="settlement in settlements" :key="settlement.id">
 				<settlement :settlement="settlement"/>
 			</li>
 		</ul>
@@ -20,19 +20,15 @@ export default {
 	name: 'app',
 
 	data() {
-		return {
-			settlements: [],
-		};
+		return { settlements: [] };
 	},
 
 	methods: {
 		addSettlement() {
 			this.settlements.push({ id: 'b' });
-		}
+		},
 	},
 
-	components: {
-		Settlement,
-	}
+	components: { Settlement },
 };
 </script>

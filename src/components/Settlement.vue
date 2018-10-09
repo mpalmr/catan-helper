@@ -54,9 +54,7 @@ export default {
 		},
 	},
 
-	components: {
-		Resource,
-	},
+	components: { Resource },
 };
 </script>
 

@@ -10,9 +10,9 @@
 			Add Resource
 		</button>
 
-		<ul v-for="resource in resources" :key="resource.id">
-			<li>
-				<Resource :resource="resource"/>
+		<ul>
+			<li v-for="resource in resources" :key="resource.id">
+				<resource v-bind="resource"/>
 			</li>
 		</ul>
 	</div>
@@ -21,34 +21,17 @@
 
 <script>
 import Resource from './Resource.vue';
-import townImage from '../assets/town.png';
-import cityImage from '../assets/city.png';
+import townImage from '../assets/images/town.png';
+import cityImage from '../assets/images/city.png';
 
 export default {
 	name: 'settlement',
-
-	props: {
-		settlement: {
-			type: Object,
-			required: true,
-		},
-	},
 
 	data() {
 		return {
 			isCity: false,
 			resources: [],
 		};
-	},
-
-	methods: {
-		toggleIsCity() {
-			this.isCity = !this.isCity;
-		},
-
-		addResource() {
-			this.resources.push({ type: null, number: null });
-		},
 	},
 
 	computed: {
@@ -61,7 +44,17 @@ export default {
 		},
 	},
 
-	Components: {
+	methods: {
+		toggleIsCity() {
+			this.isCity = !this.isCity;
+		},
+
+		addResource() {
+			this.resources.push({ type: null, number: null });
+		},
+	},
+
+	components: {
 		Resource,
 	},
 };

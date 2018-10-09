@@ -2,7 +2,7 @@
 	<div id="app">
 		<ul v-for="settlement in settlements" :key="settlement.id">
 			<li>
-				<Settlement :settlement="settlement"/>
+				<settlement :settlement="settlement"/>
 			</li>
 		</ul>
 
@@ -14,25 +14,25 @@
 
 
 <script>
-import Settlement from "./components/Settlement.vue";
+import Settlement from './components/Settlement.vue';
 
 export default {
-	name: "app",
+	name: 'app',
 
 	data() {
 		return {
-			settlements: [{ id: "a" }]
+			settlements: [],
 		};
 	},
 
 	methods: {
 		addSettlement() {
-			this.settlements.push({ id: "b" });
+			this.settlements.push({ id: 'b' });
 		}
 	},
 
 	components: {
-		Settlement
+		Settlement,
 	}
 };
 </script>

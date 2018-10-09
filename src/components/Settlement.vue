@@ -50,7 +50,7 @@ export default {
 		},
 
 		addResource() {
-			this.resources.push({ type: null, number: null });
+			this.resources.push({ type: 'grain', diceNumber: 4 });
 		},
 	},
 
@@ -60,8 +60,15 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "../sass/list";
+
 img {
 	width: 5rem;
 	height: 5rem;
+}
+
+ul {
+	@extend %list-clear;
+	display: flex;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<ul>
+		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
 				<settlement :settlement="settlement"/>
 			</li>
@@ -32,3 +32,16 @@ export default {
 	components: { Settlement },
 };
 </script>
+
+<style lang="scss">
+@import "./sass/list";
+
+body {
+	margin: 0;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.settlements {
+	@extend %list-clear;
+}
+</style>

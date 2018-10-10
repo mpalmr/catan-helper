@@ -1,29 +1,37 @@
 <template>
-	<form @submit.prevent="onSubmit" novalidate>
+	<b-form @submit.prevent="onSubmit" @reset="reset" novalidate>
 		<h1>
 			Create Settlement
 		</h1>
 
 		<ul>
 			<li v-for="(resource, i) in resources" :key="resource.id">
-				<InputWrap :error="resource.errors.type" label="Type">
-					<select v-model="resource.type">
-						<option disabled selected :value="null">
-							Select...
-						</option>
-						<option
-							v-for="resourceType in resourceTypes"
-							:key="resourceType.id"
-							:value="resourceType.id"
-						>
-							{{ resourceType.name }}
-						</option>
-					</select>
-				</InputWrap>
+				<b-form-group
+					:invalid-feedback="resource.errors.type"
+					:label-for="`type_${resource.id}`"
+					label="Type"
+				>
+					<b-form-select
+						v-model="resource.type"
+						:id="`type_${resource.id}`"
+						:options="resourceTypeOptions"
+					/>
+				</b-form-group>
 
-				<InputWrap :error="resource.errors.diceNumber" label="Dice Number">
-					<input v-model.number="resource.diceNumber" type="number" min="2" max="12" step="1" />
-				</InputWrap>
+				<b-form-group
+					:invalid-feedback="resource.errors.diceNumber"
+					:label-for="`diceNumber_${resource.id}`"
+					label="Dice Number"
+				>
+					<b-form-input
+						v-model.number="resource.diceNumber"
+						:id="`diceNumber_${resource.id}`"
+						type="number"
+						min="2"
+						max="12"
+						step="1"
+					/>
+				</b-form-group>
 
 				<b-button v-if="i > 0" @click="removeResource(resource.id)">
 					Remove
@@ -34,14 +42,13 @@
 		<b-button @click="addResource" :disabled="this.resources.length >= 3" variant="info">
 			Add Resource
 		</b-button>
-
-		<b-button @click="reset" type="button" variant="warning">
+		<b-button @click="reset" type="reset" variant="warning">
 			Reset
 		</b-button>
 		<b-button type="submit" variant="success">
 			Create
 		</b-button>
-	</form>
+	</b-form>
 </template>
 
 
@@ -49,6 +56,9 @@
 import uuid from 'uuid/v4';
 import InputWrap from './input/Wrap';
 import { resources as resourceTypes } from '../constants';
+
+const resourceTypeOptions = [{ value: null, text: 'Select...' }]
+	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name, disabled: true })));
 
 function validateDiceNumber(diceNumber) {
 	if (diceNumber === null) return 'Required';
@@ -72,7 +82,7 @@ export default {
 
 	data() {
 		return {
-			resourceTypes,
+			resourceTypeOptions,
 			resources: [defaultSettlement()],
 		};
 	},
@@ -91,14 +101,12 @@ export default {
 		},
 
 		validate() {
-			this.resources = this.resources.map(({ type, diceNumber, ...resource }) => ({
+			this.resources = this.resources.map(resource => ({
 				...resource,
-				type,
-				diceNumber,
 				applyErrors: true,
 				errors: {
-					type: type ? null : 'Required',
-					diceNumber: validateDiceNumber(diceNumber),
+					type: resource.type ? null : 'Required',
+					diceNumber: validateDiceNumber(resource.diceNumber),
 				},
 			}));
 		},

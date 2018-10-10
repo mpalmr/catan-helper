@@ -1,13 +1,18 @@
 <template>
-  <main id="app">
-    <router-view />
-  </main>
+	<div id="app">
+		<Header />
+
+		<main>
+			<router-view />
+		</main>
+	</div>
 </template>
 
-<style lang="scss">
-@import "./sass/list";
 
-.settlements {
-	@extend %list-clear;
-}
-</style>
+<script>
+import Header from './components/Header.vue';
+
+export default {
+	components: { Header },
+};
+</script>

@@ -9,7 +9,7 @@
 
 
 <script>
-import * as images from '../assets/images/resources';
+import * as images from '@/assets/images/resources';
 
 export default {
 	props: {

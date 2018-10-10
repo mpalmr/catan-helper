@@ -6,6 +6,17 @@
 			</li>
 		</ul>
 
+		<b-form-group label-for="dice-roll" label="Dice Roll">
+			<b-form-input
+				v-model.number="diceRoll"
+				id="dice-roll"
+				type="number"
+				min="2"
+				max="12"
+				step="1"
+			/>
+		</b-form-group>
+
 		<b-button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements" variant="warning">
 			{{ createSettlementButtonText }}
 		</b-button>
@@ -22,6 +33,7 @@ import CreateSettlement from '@/components/CreateSettlement';
 export default {
 	data() {
 		return {
+			diceRoll: null,
 			settlements: [],
 			isCreatingSettlementToggled: false,
 		};

@@ -17,8 +17,8 @@
 
 <script>
 import Resource from './Resource';
-import townImage from '../assets/images/town.png';
-import cityImage from '../assets/images/city.png';
+import townImage from '@/assets/images/town.png';
+import cityImage from '@/assets/images/city.png';
 
 export default {
 	props: {

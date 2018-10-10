@@ -54,7 +54,7 @@
 
 <script>
 import uuid from 'uuid/v4';
-import { resources as resourceTypes } from '../constants';
+import { resources as resourceTypes } from '@/constants';
 
 const resourceTypeOptions = [{ value: null, text: 'Select...', disabled: true }]
 	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name })));

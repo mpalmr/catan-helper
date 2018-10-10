@@ -2,34 +2,58 @@
 	<div id="app">
 		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
-				<settlement :settlement="settlement"/>
+				<settlement v-bind="settlement" />
 			</li>
 		</ul>
 
-		<button @click="addSettlement">
-			Add Settlement
+		<button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements">
+			{{ createSettlementButtonText }}
 		</button>
+
+		<create-settlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
 	</div>
 </template>
 
 
 <script>
 import Settlement from './components/Settlement.vue';
+import CreateSettlement from './components/CreateSettlement.vue';
 
 export default {
 	name: 'app',
 
 	data() {
-		return { settlements: [] };
+		return {
+			settlements: [],
+			isCreatingSettlementToggled: false,
+		};
 	},
 
-	methods: {
-		addSettlement() {
-			this.settlements.push({ id: 'b' });
+	computed: {
+		hasMinimumSettlements() {
+			return this.settlements.length >= 2;
+		},
+
+		isCreatingSettlement() {
+			return !this.hasMinimumSettlements || this.isCreatingSettlementToggled;
+		},
+
+		createSettlementButtonText() {
+			return this.isCreatingSettlement ? 'Cancel' : 'Create Settlement';
 		},
 	},
 
-	components: { Settlement },
+	methods: {
+		toggleCreateSettlement() {
+			this.isCreatingSettlementToggled = !this.isCreatingSettlementToggled;
+		},
+
+		createSettlement(settlement) {
+			this.settlements.push(settlement);
+		},
+	},
+
+	components: { Settlement, CreateSettlement },
 };
 </script>
 

@@ -15,18 +15,13 @@ export default {
 	name: 'resource',
 
 	props: {
-		type: {
-			type: String,
-			required: true,
-		},
-		diceNumber: {
-			type: Number,
-			required: true,
-		},
+		type: { type: String, required: true },
+		diceNumber: { type: Number, required: true },
 	},
 
 	computed: {
 		imgSrc() {
+			console.log(this);
 			return images[this.type];
 		},
 	},

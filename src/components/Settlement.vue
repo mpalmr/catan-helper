@@ -6,13 +6,9 @@
 			{{ settlementText }}
 		</button>
 
-		<button @click="addResource">
-			Add Resource
-		</button>
-
 		<ul>
 			<li v-for="resource in resources" :key="resource.id">
-				<resource v-bind="resource"/>
+				<resource v-bind="resource" />
 			</li>
 		</ul>
 	</div>
@@ -27,11 +23,13 @@ import cityImage from '../assets/images/city.png';
 export default {
 	name: 'settlement',
 
+	props: {
+		id: { type: String, required: true },
+		resources: { type: Array, required: true },
+	},
+
 	data() {
-		return {
-			isCity: false,
-			resources: [],
-		};
+		return { isCity: false };
 	},
 
 	computed: {
@@ -47,10 +45,6 @@ export default {
 	methods: {
 		toggleIsCity() {
 			this.isCity = !this.isCity;
-		},
-
-		addResource() {
-			this.resources.push({ type: 'grain', diceNumber: 4 });
 		},
 	},
 

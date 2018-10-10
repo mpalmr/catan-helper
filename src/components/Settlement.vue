@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<img v-bind="imgProps">
+		<img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
 
-		<button v-if="!isCity" @click="upgradeToCity">
+		<Button v-if="!isCity" @click="upgradeToCity">
 			Upgrade
-		</button>
+		</Button>
 
 		<ul>
 			<li v-for="resource in resources" :key="resource.id">
@@ -17,6 +17,7 @@
 
 <script>
 import Resource from './Resource.vue';
+import Button from './Button.vue';
 import townImage from '../assets/images/town.png';
 import cityImage from '../assets/images/city.png';
 
@@ -31,15 +32,8 @@ export default {
 	},
 
 	computed: {
-		settlementText() {
-			return this.isCity ? 'City' : 'Town';
-		},
-
-		imgProps() {
-			return {
-				src: this.isCity ? cityImage : townImage,
-				alt: this.isCity ? 'City' : 'Town',
-			};
+		imgSrc() {
+			return this.isCity ? cityImage : townImage;
 		},
 	},
 
@@ -49,7 +43,7 @@ export default {
 		},
 	},
 
-	components: { Resource },
+	components: { Resource, Button },
 };
 </script>
 

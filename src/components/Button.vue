@@ -45,6 +45,7 @@ button {
 	line-height: 1.5;
 	text-align: center;
 	white-space: nowrap;
+	font-size: 1rem;
 	color: $color-text-light;
 	user-select: none;
 	transition: opacity .15s linear,
@@ -54,6 +55,12 @@ button {
 	}
 	&.success {
 		@include bg($color-success);
+	}
+	&.warning {
+		@include bg($color-warning);
+	}
+	&.danger {
+		@include bg($color-danger);
 	}
 }
 </style>

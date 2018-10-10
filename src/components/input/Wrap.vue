@@ -20,10 +20,7 @@ export const commonProps = {
 	error: String,
 };
 
-export default {
-	name: 'input-wrap',
-	props: commonProps,
-};
+export default { props: commonProps };
 </script>
 
 

@@ -6,7 +6,7 @@
 
 		<ul>
 			<li v-for="(resource, i) in resources" :key="resource.id">
-				<input-wrap :error="resource.errors.type" label="Type">
+				<InputWrap :error="resource.errors.type" label="Type">
 					<select v-model="resource.type">
 						<option disabled selected :value="null">
 							Select...
@@ -19,34 +19,40 @@
 							{{ resourceType.name }}
 						</option>
 					</select>
-				</input-wrap>
+				</InputWrap>
 
-				<input-wrap :error="resource.errors.diceNumber" label="Dice Number">
+				<InputWrap :error="resource.errors.diceNumber" label="Dice Number">
 					<input v-model.number="resource.diceNumber" type="number" min="2" max="12" step="1" />
-				</input-wrap>
+				</InputWrap>
 
-				<button v-if="i > 0" @click="removeResource(resource.id)" type="button">
+				<Button v-if="i > 0" @click="removeResource(resource.id)" type="button">
 					Remove
-				</button>
+				</Button>
 			</li>
 		</ul>
 
-		<button @click="addResource" :disabled="hasMaximumResources" type="button">
+		<Button
+			@click="addResource"
+			:disabled="this.resources.length >= 3"
+			type="button"
+			theme="dangere"
+		>
 			Add Resource
-		</button>
+		</Button>
 
-		<button @click="reset" type="button">
+		<Button @click="reset" type="button" theme="warning">
 			Reset
-		</button>
-		<button type="submit">
+		</Button>
+		<Button type="submit" theme="success">
 			Create
-		</button>
+		</Button>
 	</form>
 </template>
 
 
 <script>
 import uuid from 'uuid/v4';
+import Button from './Button.vue';
 import InputWrap from './input/Wrap.vue';
 import { resources as resourceTypes } from '../constants';
 
@@ -83,10 +89,6 @@ export default {
 				.every(({ errors }) => Object.values(errors)
 					.every(error => error === null));
 		},
-
-		hasMaximumResources() {
-			return this.resources.length >= 3;
-		},
 	},
 
 	methods: {
@@ -110,7 +112,6 @@ export default {
 		onSubmit() {
 			this.validate();
 			if (this.isValid) {
-				console.log(this.resources);
 				this.createSettlement({
 					id: uuid(),
 					resources: this.resources.map(({ applyErrors, errors, ...resource }) => resource),
@@ -129,7 +130,7 @@ export default {
 		},
 	},
 
-	components: { InputWrap },
+	components: { Button, InputWrap },
 };
 </script>
 
@@ -144,5 +145,9 @@ ul {
 	> li {
 		margin-top: 1.5em;
 	}
+}
+
+Button + Button {
+	margin-left: .5em;
 }
 </style>

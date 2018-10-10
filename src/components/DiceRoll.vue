@@ -1,20 +1,8 @@
 <template>
 	<section>
-		<div v-if="diceRollResult">
-			<h1 class="result">
-				{{ diceRollResult }}
-			</h1>
-
-			<h2>Cards Gained</h2>
-			<ul>
-				<li v-for="resource in resourcesGained" :key="resource.type">
-					<span class="resource-amount">
-						{{ resource.amount }}
-					</span>
-					{{ resource.type }}
-				</li>
-			</ul>
-		</div>
+		<h1 v-if="diceRollResult" class="result">
+			{{ diceRollResult }}
+		</h1>
 
 		<b-form @submit.prevent="onSubmit">
 			<b-form-group label-for="dice-roll" label="Dice Roll">
@@ -28,6 +16,21 @@
 				/>
 			</b-form-group>
 		</b-form>
+
+		<div v-if="resourcesGained.length">
+			<h2>Cards Gained</h2>
+			<ul>
+				<li v-for="resource in resourcesGained" :key="resource.type">
+					<span class="resource-amount">
+						{{ resource.amount }}
+					</span>
+					{{ resource.type }}
+				</li>
+			</ul>
+		</div>
+		<p v-else-if="diceRollResult">
+			No resources this roll...
+		</p>
 	</section>
 </template>
 
@@ -60,7 +63,10 @@ export default {
 				}), {});
 
 			return Object.entries(totals)
-				.map(([type, amount]) => ({ type, amount }))
+				.map(([type, amount]) => ({
+					amount,
+					type: `${type.charAt(0).toUpperCase()}${type.slice(1)}`,
+				}))
 				.sort((a, b) => b.amount - a.amount);
 		},
 	},
@@ -78,6 +84,10 @@ export default {
 <style lang="scss" scoped>
 @import "../sass/list";
 
+section {
+	margin-bottom: 2rem;
+}
+
 h1 {
 	font-size: 2rem;
 	font-weight: bold;
@@ -86,5 +96,15 @@ h1 {
 
 ul {
 	@extend %list-clear;
+}
+
+.resource-amount {
+	margin-right: .5em;
+	letter-spacing: -.1em;
+	font-weight: bold;
+	font-style: italic;
+	&::before {
+		content: "x";
+	}
 }
 </style>

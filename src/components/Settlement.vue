@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
+	<div class="container">
+		<b-img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
 
 		<b-button v-if="!isCity" @click="upgrade">
 			Upgrade
@@ -47,6 +47,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "../sass/list";
+
+.container {
+	display: flex;
+	align-items: center;
+}
 
 img {
 	width: 5rem;

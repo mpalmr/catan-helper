@@ -20,13 +20,13 @@
 				</b-form-group>
 
 				<b-form-group
-					:invalid-feedback="resource.errors.diceNumber"
-					:label-for="`diceNumber_${resource.id}`"
+					:invalid-feedback="resource.errors.diceRoll"
+					:label-for="`diceRoll_${resource.id}`"
 					label="Dice Number"
 				>
 					<b-form-input
-						v-model.number="resource.diceNumber"
-						:id="`diceNumber_${resource.id}`"
+						v-model.number="resource.diceRoll"
+						:id="`diceRoll_${resource.id}`"
 						type="number"
 						min="2"
 						max="12"
@@ -61,19 +61,19 @@ import { resources as resourceTypes } from '@/constants';
 const resourceTypeOptions = [{ value: null, text: 'Select...', disabled: true }]
 	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name })));
 
-function validateDiceNumber(diceNumber) {
-	if (diceNumber === null) return 'Required';
-	if (diceNumber < 2) return 'Minimum of two.';
-	if (diceNumber > 12) return 'Maximum of twelve.';
+function validatediceRoll(diceRoll) {
+	if (diceRoll === null) return 'Required';
+	if (diceRoll < 2) return 'Minimum of two.';
+	if (diceRoll > 12) return 'Maximum of twelve.';
 	return null;
 }
 
 const defaultSettlement = () => ({
 	id: uuid(),
 	type: null,
-	diceNumber: null,
+	diceRoll: null,
 	applyErrors: false,
-	errors: { type: null, diceNumber: null },
+	errors: { type: null, diceRoll: null },
 });
 
 export default {
@@ -103,7 +103,7 @@ export default {
 				applyErrors: true,
 				errors: {
 					type: resource.type ? null : 'Required',
-					diceNumber: validateDiceNumber(resource.diceNumber),
+					diceRoll: validatediceRoll(resource.diceRoll),
 				},
 			}));
 		},
@@ -126,6 +126,7 @@ export default {
 			if (this.isValid) {
 				this.createSettlement({
 					id: uuid(),
+					isCity: false,
 					resources: this.resources.map(({ applyErrors, errors, ...resource }) => resource),
 				});
 				this.onReset();

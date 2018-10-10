@@ -5,7 +5,7 @@
 		<h1>Settlements</h1>
 		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
-				<settlement v-bind="settlement" />
+				<Settlement v-bind="settlement" :upgradeSettlement="upgradeSettlement" />
 			</li>
 		</ul>
 
@@ -49,6 +49,14 @@ export default {
 
 		createSettlement(settlement) {
 			this.settlements.push(settlement);
+		},
+
+		upgradeSettlement(id) {
+			this.settlements = this.settlements
+				.map(settlement => (settlement.id !== id ? settlement : {
+					...settlement,
+					isCity: true,
+				}));
 		},
 	},
 

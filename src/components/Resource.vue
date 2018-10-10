@@ -1,8 +1,8 @@
 <template>
 	<div class="container">
 		<img :src="imgSrc" :alt="type">
-		<span class="dice-number">
-			{{ diceNumber }}
+		<span class="dice-roll">
+			{{ diceRoll }}
 		</span>
 	</div>
 </template>
@@ -14,7 +14,7 @@ import * as images from '@/assets/images/resources';
 export default {
 	props: {
 		type: { type: String, required: true },
-		diceNumber: {
+		diceRoll: {
 			required: true,
 			validator(value) {
 				return value >= 2 && value <= 12;
@@ -43,7 +43,7 @@ img {
 	height: 2.5rem;
 }
 
-.dice-number {
+.dice-roll {
 	position: absolute;
 	top: 50%;
 	left: 50%;

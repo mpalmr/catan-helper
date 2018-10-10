@@ -8,6 +8,9 @@
 			<h2>Cards Gained</h2>
 			<ul>
 				<li v-for="resource in resourcesGained" :key="resource.type">
+					<span class="resource-amount">
+						{{ resource.amount }}
+					</span>
 					{{ resource.type }}
 				</li>
 			</ul>
@@ -41,7 +44,24 @@ export default {
 
 	computed: {
 		resourcesGained() {
-			return { type: 'ey' };
+			const totalsPerSettlement = this.settlements
+				.map(({ resources, isCity }) => resources
+					.filter(({ diceRoll }) => diceRoll === this.diceRollResult)
+					.map(({ type }) => ({
+						type,
+						amount: isCity ? 2 : 1,
+					})));
+
+			const totals = totalsPerSettlement
+				.flat()
+				.reduce((acc, { type, amount }) => ({
+					...acc,
+					[type]: (acc[type] || 0) + amount,
+				}), {});
+
+			return Object.entries(totals)
+				.map(([type, amount]) => ({ type, amount }))
+				.sort((a, b) => b.amount - a.amount);
 		},
 	},
 

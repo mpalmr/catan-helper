@@ -24,7 +24,7 @@ export default {
 				...this.game,
 				modified: new Date(),
 			}));
-			this.$router.push('/game');
+			this.$router.push('/play');
 		},
 
 		newGame() {
@@ -33,7 +33,7 @@ export default {
 				created: new Date(),
 				modified: new Date(),
 			}));
-			this.$router.push('/game');
+			this.$router.push('/play');
 		},
 	},
 };

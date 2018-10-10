@@ -2,7 +2,7 @@
 	<div>
 		<img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
 
-		<b-button v-if="!isCity" @click="upgradeToCity">
+		<b-button v-if="!isCity" @click="upgrade">
 			Upgrade
 		</b-button>
 
@@ -23,11 +23,9 @@ import cityImage from '@/assets/images/city.png';
 export default {
 	props: {
 		id: { type: String, required: true },
+		isCity: { type: Boolean, required: true },
 		resources: { type: Array, required: true },
-	},
-
-	data() {
-		return { isCity: false };
+		upgradeSettlement: { type: Function, required: true },
 	},
 
 	computed: {
@@ -37,8 +35,8 @@ export default {
 	},
 
 	methods: {
-		upgradeToCity() {
-			this.isCity = true;
+		upgrade() {
+			this.upgradeSettlement(this.id);
 		},
 	},
 

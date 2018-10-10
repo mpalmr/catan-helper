@@ -1,61 +1,12 @@
 <template>
-	<b-container id="app">
-		<ul class="settlements">
-			<li v-for="settlement in settlements" :key="settlement.id">
-				<settlement v-bind="settlement" />
-			</li>
-		</ul>
-
-		<b-button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements" variant="warning">
-			{{ createSettlementButtonText }}
-		</b-button>
-
-		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
-	</b-container>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view />
+  </div>
 </template>
-
-
-<script>
-import Settlement from './components/Settlement';
-import CreateSettlement from './components/CreateSettlement';
-
-export default {
-	name: 'app',
-
-	data() {
-		return {
-			settlements: [],
-			isCreatingSettlementToggled: false,
-		};
-	},
-
-	computed: {
-		hasMinimumSettlements() {
-			return this.settlements.length >= 2;
-		},
-
-		isCreatingSettlement() {
-			return !this.hasMinimumSettlements || this.isCreatingSettlementToggled;
-		},
-
-		createSettlementButtonText() {
-			return this.isCreatingSettlement ? 'Cancel' : 'Create Settlement';
-		},
-	},
-
-	methods: {
-		toggleCreateSettlement() {
-			this.isCreatingSettlementToggled = !this.isCreatingSettlementToggled;
-		},
-
-		createSettlement(settlement) {
-			this.settlements.push(settlement);
-		},
-	},
-
-	components: { Settlement, CreateSettlement },
-};
-</script>
 
 <style lang="scss">
 @import "./sass/list";

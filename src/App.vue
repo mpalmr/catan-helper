@@ -6,11 +6,11 @@
 			</li>
 		</ul>
 
-		<button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements">
+		<Button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements">
 			{{ createSettlementButtonText }}
-		</button>
+		</Button>
 
-		<create-settlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
+		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
 	</div>
 </template>
 
@@ -18,6 +18,7 @@
 <script>
 import Settlement from './components/Settlement.vue';
 import CreateSettlement from './components/CreateSettlement.vue';
+import Button from './components/Button.vue';
 
 export default {
 	name: 'app',
@@ -53,7 +54,7 @@ export default {
 		},
 	},
 
-	components: { Settlement, CreateSettlement },
+	components: { Settlement, CreateSettlement, Button },
 };
 </script>
 

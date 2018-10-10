@@ -12,8 +12,6 @@
 import * as images from '../assets/images/resources';
 
 export default {
-	name: 'resource',
-
 	props: {
 		type: { type: String, required: true },
 		diceNumber: { type: Number, required: true },
@@ -21,7 +19,6 @@ export default {
 
 	computed: {
 		imgSrc() {
-			console.log(this);
 			return images[this.type];
 		},
 	},

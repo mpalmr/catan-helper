@@ -8,7 +8,7 @@
 
 		<ul>
 			<li v-for="resource in resources" :key="resource.id">
-				<resource v-bind="resource" />
+				<Resource v-bind="resource" />
 			</li>
 		</ul>
 	</div>
@@ -21,8 +21,6 @@ import townImage from '../assets/images/town.png';
 import cityImage from '../assets/images/city.png';
 
 export default {
-	name: 'settlement',
-
 	props: {
 		id: { type: String, required: true },
 		resources: { type: Array, required: true },

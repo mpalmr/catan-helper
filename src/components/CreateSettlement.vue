@@ -66,8 +66,6 @@ const defaultSettlement = () => ({
 });
 
 export default {
-	name: 'create-settlement',
-
 	props: {
 		createSettlement: { type: Function, required: true },
 	},

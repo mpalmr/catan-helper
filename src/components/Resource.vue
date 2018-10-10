@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<img :src="images[type]" :alt="type">
+		<img :src="imgSrc" :alt="type">
 		<span class="dice-number">
 			{{ diceNumber }}
 		</span>
@@ -19,6 +19,12 @@ export default {
 			validator(value) {
 				return value >= 2 && value <= 12;
 			},
+		},
+	},
+
+	computed: {
+		imgSrc() {
+			return images[this.type];
 		},
 	},
 };

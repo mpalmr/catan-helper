@@ -16,13 +16,12 @@
 
 
 <script>
-import gameStorage from '@/storage/games';
 
-function validateId(id) {
-	if (!id) return 'Required';
-	if (gameStorage.games[id]) return 'Game ID must be unique'
-	return null;
-}
+// function validateId(id) {
+// 	if (!id) return 'Required';
+// 	if (gameStorage.games[id]) return 'Game ID must be unique'
+// 	return null;
+// }
 
 export default {
 	data() {
@@ -34,11 +33,11 @@ export default {
 
 	methods: {
 		onSubmit() {
-			this.errors = { id: validateId(this.id) };
-			if (this.errors.id === null) {
-				gameStorage.add({ id: this.id });
-				this.$router.push(`/${this.id}`);
-			}
+			// this.errors = { id: validateId(this.id) };
+			// if (this.errors.id === null) {
+			// 	// gameStorage.add({ id: this.id });
+			// 	this.$router.push(`/${this.id}`);
+			// }
 		},
 	},
 };

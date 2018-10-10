@@ -26,12 +26,10 @@
 
 
 <script>
-import gameStorage from '@/storage/games';
-
 export default {
 	data() {
 		return {
-			storage: gameStorage,
+			storage: {},
 			fields: [
 				{ key: 'id', label: 'ID' },
 				{

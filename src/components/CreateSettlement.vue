@@ -95,7 +95,6 @@ export default {
 	},
 
 	methods: {
-
 		validate() {
 			this.resources = this.resources.map(resource => ({
 				...resource,

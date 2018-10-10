@@ -1,21 +1,12 @@
 <template>
-	<b-container id="app">
+	<b-container>
 		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
 				<settlement v-bind="settlement" />
 			</li>
 		</ul>
 
-		<b-form-group label-for="dice-roll" label="Dice Roll">
-			<b-form-input
-				v-model.number="diceRoll"
-				id="dice-roll"
-				type="number"
-				min="2"
-				max="12"
-				step="1"
-			/>
-		</b-form-group>
+		<!-- <DiceRoll /> -->
 
 		<b-button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements" variant="warning">
 			{{ createSettlementButtonText }}
@@ -27,13 +18,13 @@
 
 
 <script>
+import DiceRoll from '@/components/DiceRoll';
 import Settlement from '@/components/Settlement';
 import CreateSettlement from '@/components/CreateSettlement';
 
 export default {
 	data() {
 		return {
-			diceRoll: null,
 			settlements: [],
 			isCreatingSettlementToggled: false,
 		};
@@ -63,7 +54,7 @@ export default {
 		},
 	},
 
-	components: { Settlement, CreateSettlement },
+	components: { DiceRoll, Settlement, CreateSettlement },
 };
 </script>
 

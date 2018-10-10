@@ -5,16 +5,7 @@
 		</h1>
 
 		<b-form @submit.prevent="onSubmit">
-			<b-form-group label-for="dice-roll" label="Dice Roll">
-				<b-form-input
-					v-model.number="diceRollInput"
-					id="dice-roll"
-					type="number"
-					min="2"
-					max="12"
-					step="1"
-				/>
-			</b-form-group>
+			<DiceRollInput v-model.number="diceRollInput" id="diceRoll" />
 		</b-form>
 
 		<div v-if="resourcesGained.length">
@@ -36,6 +27,8 @@
 
 
 <script>
+import DiceRollInput from './input/DiceRoll.vue';
+
 export default {
 	props: {
 		settlements: { type: Array, required: true },
@@ -77,6 +70,8 @@ export default {
 			this.diceRollInput = null;
 		},
 	},
+
+	components: { DiceRollInput },
 };
 </script>
 

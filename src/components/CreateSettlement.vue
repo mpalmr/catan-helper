@@ -19,21 +19,7 @@
 					/>
 				</b-form-group>
 
-				<b-form-group
-					:invalid-feedback="resource.errors.diceRoll"
-					:label-for="`diceRoll_${resource.id}`"
-					label="Dice Number"
-				>
-					<b-form-input
-						v-model.number="resource.diceRoll"
-						:id="`diceRoll_${resource.id}`"
-						type="number"
-						min="2"
-						max="12"
-						step="1"
-						required
-					/>
-				</b-form-group>
+				<DiceRollInput v-model.number="resource.diceRoll" :id="`diceRoll_${resource.id}`" />
 
 				<b-button v-if="i > 0" @click="removeResource(resource.id)">
 					Remove
@@ -57,6 +43,7 @@
 <script>
 import uuid from 'uuid/v4';
 import { resources as resourceTypes } from '@/constants';
+import DiceRollInput from './input/DiceRoll';
 
 const resourceTypeOptions = [{ value: null, text: 'Select...', disabled: true }]
 	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name })));
@@ -133,6 +120,8 @@ export default {
 			}
 		},
 	},
+
+	components: { DiceRollInput },
 };
 </script>
 

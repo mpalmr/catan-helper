@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<img :src="imgSrc" :alt="settlementText">
+		<img v-bind="imgProps">
 
-		<button @click="toggleIsCity">
-			{{ settlementText }}
+		<button v-if="!isCity" @click="upgradeToCity">
+			Upgrade
 		</button>
 
 		<ul>
@@ -37,14 +37,17 @@ export default {
 			return this.isCity ? 'City' : 'Town';
 		},
 
-		imgSrc() {
-			return this.isCity ? cityImage : townImage;
+		imgProps() {
+			return {
+				src: this.isCity ? cityImage : townImage,
+				alt: this.isCity ? 'City' : 'Town',
+			};
 		},
 	},
 
 	methods: {
-		toggleIsCity() {
-			this.isCity = !this.isCity;
+		upgradeToCity() {
+			this.isCity = true;
 		},
 	},
 

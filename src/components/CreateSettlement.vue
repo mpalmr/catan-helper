@@ -1,5 +1,5 @@
 <template>
-	<b-form @submit.prevent="onSubmit" @reset="reset" novalidate>
+	<b-form @submit.prevent="onSubmit" @reset="onReset" novalidate>
 		<h1>
 			Create Settlement
 		</h1>
@@ -42,7 +42,7 @@
 		<b-button @click="addResource" :disabled="this.resources.length >= 3" variant="info">
 			Add Resource
 		</b-button>
-		<b-button @click="reset" type="reset" variant="warning">
+		<b-button type="reset" variant="warning">
 			Reset
 		</b-button>
 		<b-button type="submit" variant="success">
@@ -54,11 +54,10 @@
 
 <script>
 import uuid from 'uuid/v4';
-import InputWrap from './input/Wrap';
 import { resources as resourceTypes } from '../constants';
 
-const resourceTypeOptions = [{ value: null, text: 'Select...' }]
-	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name, disabled: true })));
+const resourceTypeOptions = [{ value: null, text: 'Select...', disabled: true }]
+	.concat(resourceTypes.map(({ id, name }) => ({ value: id, text: name })));
 
 function validateDiceNumber(diceNumber) {
 	if (diceNumber === null) return 'Required';
@@ -96,9 +95,6 @@ export default {
 	},
 
 	methods: {
-		reset() {
-			this.resources = [defaultSettlement()];
-		},
 
 		validate() {
 			this.resources = this.resources.map(resource => ({
@@ -111,17 +107,6 @@ export default {
 			}));
 		},
 
-		onSubmit() {
-			this.validate();
-			if (this.isValid) {
-				this.createSettlement({
-					id: uuid(),
-					resources: this.resources.map(({ applyErrors, errors, ...resource }) => resource),
-				});
-				this.reset();
-			}
-		},
-
 		addResource() {
 			this.validate();
 			if (this.isValid) this.resources.push(defaultSettlement());
@@ -130,9 +115,22 @@ export default {
 		removeResource(id) {
 			this.resources = this.resources.filter(resource => resource.id !== id);
 		},
-	},
 
-	components: { InputWrap },
+		onReset() {
+			this.resources = [defaultSettlement()];
+		},
+
+		onSubmit() {
+			this.validate();
+			if (this.isValid) {
+				this.createSettlement({
+					id: uuid(),
+					resources: this.resources.map(({ applyErrors, errors, ...resource }) => resource),
+				});
+				this.onReset();
+			}
+		},
+	},
 };
 </script>
 

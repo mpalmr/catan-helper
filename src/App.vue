@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<b-container id="app">
 		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
 				<settlement v-bind="settlement" />
@@ -11,7 +11,7 @@
 		</b-button>
 
 		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
-	</div>
+	</b-container>
 </template>
 
 

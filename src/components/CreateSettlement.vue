@@ -6,22 +6,15 @@
 
 		<ul>
 			<li v-for="(resource, i) in resources" :key="resource.id">
-				<b-form-group
-					:invalid-feedback="resource.errors.type"
-					:label-for="`type_${resource.id}`"
-					label="Type"
-				>
-					<b-form-select
-						v-model="resource.type"
-						:id="`type_${resource.id}`"
-						:options="resourceTypeOptions"
-						required
-					/>
-				</b-form-group>
+				<SelectResource
+					v-model="resource.type"
+					:id="`type_${resource.id}`"
+					:options="resourceTypeOptions"
+				/>
 
 				<DiceRollInput v-model.number="resource.diceRoll" :id="`diceRoll_${resource.id}`" />
 
-				<b-button v-if="i > 0" @click="removeResource(resource.id)">
+				<b-button @click="removeResource(resource.id)" v-if="i > 0">
 					Remove
 				</b-button>
 			</li>
@@ -43,6 +36,7 @@
 <script>
 import uuid from 'uuid/v4';
 import { resources as resourceTypes } from '@/constants';
+import SelectResource from './input/SelectResource';
 import DiceRollInput from './input/DiceRoll';
 
 const resourceTypeOptions = [{ value: null, text: 'Select...', disabled: true }]
@@ -121,7 +115,7 @@ export default {
 		},
 	},
 
-	components: { DiceRollInput },
+	components: { SelectResource, DiceRollInput },
 };
 </script>
 

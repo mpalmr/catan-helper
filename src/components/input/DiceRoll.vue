@@ -1,9 +1,9 @@
 <template>
-	<b-form-group label-for="dice-roll" label="Dice Roll">
+	<b-form-group :label-for="id" label="Dice Roll">
 		<b-form-input
 			@input="handleInput"
 			:value="inputValue"
-			id="dice-roll"
+			:id="id"
 			type="number"
 			min="2"
 			max="12"
@@ -16,15 +16,12 @@
 <script>
 export default {
 	props: {
+		id: { type: String, required: true },
 		value: {
 			type: Number,
 			validator(value) {
 				return value >= 2 && value <= 12;
 			},
-		},
-		id: {
-			type: String,
-			required: true,
 		},
 	},
 

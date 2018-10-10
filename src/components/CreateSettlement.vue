@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="onSubmit">
+	<form @submit.prevent="onSubmit" novalidate>
 		<h1>
 			Create Settlement
 		</h1>
@@ -35,7 +35,6 @@
 			@click="addResource"
 			:disabled="this.resources.length >= 3"
 			type="button"
-			theme="dangere"
 		>
 			Add Resource
 		</Button>

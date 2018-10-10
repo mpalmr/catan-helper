@@ -13,8 +13,9 @@ export default {
 			default: false,
 		},
 		theme: {
-			type: String,
-			default: 'default',
+			validator(value) {
+				return ['success', 'warning', 'danger'].includes(value);
+			},
 		},
 	},
 };

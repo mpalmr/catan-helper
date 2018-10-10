@@ -14,7 +14,12 @@ import * as images from '../assets/images/resources';
 export default {
 	props: {
 		type: { type: String, required: true },
-		diceNumber: { type: Number, required: true },
+		diceNumber: {
+			required: true,
+			validator(value) {
+				return value >= 2 && value <= 12;
+			},
+		},
 	},
 };
 </script>

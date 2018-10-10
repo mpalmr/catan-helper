@@ -1,13 +1,14 @@
 <template>
-  <div class="home">
-    <App />
-  </div>
+	<div>
+		<b-button to="/game" variant="success">
+			New Game
+		</b-button>
+	</div>
 </template>
 
-<script>
-import App from '@/App.vue'
 
+<script>
 export default {
-  components: { App }
-}
+
+};
 </script>

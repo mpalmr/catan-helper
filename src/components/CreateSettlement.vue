@@ -1,5 +1,5 @@
 <template>
-	<b-form @submit.prevent="onSubmit" @reset="onReset" novalidate>
+	<b-form @submit.prevent="onSubmit" @reset="onReset">
 		<h1>
 			Create Settlement
 		</h1>
@@ -15,6 +15,7 @@
 						v-model="resource.type"
 						:id="`type_${resource.id}`"
 						:options="resourceTypeOptions"
+						required
 					/>
 				</b-form-group>
 
@@ -30,6 +31,7 @@
 						min="2"
 						max="12"
 						step="1"
+						required
 					/>
 				</b-form-group>
 

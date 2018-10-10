@@ -1,6 +1,6 @@
 <template>
 	<b-container>
-		<DiceRoll v-if="hasMinimumSettlements" />
+		<DiceRoll v-if="hasMinimumSettlements" :settlements="settlements" />
 
 		<h1>Settlements</h1>
 		<ul class="settlements">
@@ -9,16 +9,17 @@
 			</li>
 		</ul>
 
-		<b-button @click="toggleCreateSettlement" v-if="hasMinimumSettlements" variant="warning">
-			{{ this.isCreatingSettlement ? 'Cancel' : 'Create Settlement' }}
+		<b-button @click="toggleCreate" v-if="hasMinimumSettlements" variant="warning">
+			{{ this.isCreating ? 'Cancel' : 'Create Settlement' }}
 		</b-button>
 
-		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
+		<CreateSettlement v-if="isCreating" :createSettlement="createSettlement" />
 	</b-container>
 </template>
 
 
 <script>
+import { getGame } from '@/storage';
 import DiceRoll from '@/components/DiceRoll';
 import Settlement from '@/components/Settlement';
 import CreateSettlement from '@/components/CreateSettlement';
@@ -26,8 +27,8 @@ import CreateSettlement from '@/components/CreateSettlement';
 export default {
 	data() {
 		return {
-			settlements: [],
-			isCreatingSettlementToggled: false,
+			settlements: getGame().settlements,
+			isCreatingToggled: false,
 		};
 	},
 
@@ -36,14 +37,14 @@ export default {
 			return this.settlements.length >= 2;
 		},
 
-		isCreatingSettlement() {
-			return !this.hasMinimumSettlements || this.isCreatingSettlementToggled;
+		isCreating() {
+			return !this.hasMinimumSettlements || this.isCreatingToggled;
 		},
 	},
 
 	methods: {
-		toggleCreateSettlement() {
-			this.isCreatingSettlementToggled = !this.isCreatingSettlementToggled;
+		toggleCreate() {
+			this.isCreatingToggled = !this.isCreatingToggled;
 		},
 
 		createSettlement(settlement) {

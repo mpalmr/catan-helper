@@ -1,13 +1,22 @@
 <template>
 	<section>
-		<p v-if="result" class="result">
-			{{ result }}
-		</p>
+		<div v-if="diceRollResult">
+			<h1 class="result">
+				{{ diceRollResult }}
+			</h1>
+
+			<h2>Cards Gained</h2>
+			<ul>
+				<li v-for="resource in resourcesGained" :key="resource.type">
+					{{ resource.type }}
+				</li>
+			</ul>
+		</div>
 
 		<b-form @submit.prevent="onSubmit">
 			<b-form-group label-for="dice-roll" label="Dice Roll">
 				<b-form-input
-					v-model.number="diceRoll"
+					v-model.number="diceRollInput"
 					id="dice-roll"
 					type="number"
 					min="2"
@@ -22,24 +31,24 @@
 
 <script>
 export default {
+	props: {
+		settlements: { type: Array, required: true },
+	},
+
 	data() {
-		return {
-			result: null,
-			diceRoll: null,
-			error: null,
-		};
+		return { diceRollResult: null, diceRollInput: null };
+	},
+
+	computed: {
+		resourcesGained() {
+			return { type: 'ey' };
+		},
 	},
 
 	methods: {
 		onSubmit() {
-			if (this.diceRoll === null) this.error = 'Required';
-			else if (this.diceRoll < 2) this.error = 'Cannot be less than two';
-			else if (this.diceRoll > 12) this.error = 'Cannot be more than twelve';
-			else {
-				this.error = null;
-				this.result = this.diceRoll;
-				this.diceRoll = null;
-			}
+			this.diceRollResult = this.diceRollInput;
+			this.diceRollInput = null;
 		},
 	},
 };
@@ -47,9 +56,15 @@ export default {
 
 
 <style lang="scss" scoped>
-.result {
+@import "../sass/list";
+
+h1 {
 	font-size: 2rem;
 	font-weight: bold;
 	text-align: center;
+}
+
+ul {
+	@extend %list-clear;
 }
 </style>

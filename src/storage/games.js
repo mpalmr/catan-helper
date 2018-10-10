@@ -1,27 +1,35 @@
 const lsKey = 'games';
 
 export default {
-	games: Object.fromEntries(Object.entries(JSON.parse(localStorage.getItem(lsKey)) || {})
-		.map(([id, { lastPlayed, created, ...game }]) => [id, {
-			lastPlayed: lastPlayed ? new Date(lastPlayed) : null,
-			created: new Date(created),
-			...game,
-		}])),
+	get games() {
+		return Object.fromEntries(Object.entries(JSON.parse(localStorage.getItem(lsKey)) || {})
+			.map(([id, { lastPlayed, created, ...game }]) => [id, {
+				lastPlayed: lastPlayed ? new Date(lastPlayed) : null,
+				created: new Date(created),
+				...game,
+			}]));
+	},
 
-	save() {
-		localStorage.setItem(lsKey, JSON.stringify(this.games));
-		return this;
+	set games(games) {
+		localStorage.setItem(lsKey, JSON.stringify(games));
 	},
 
 	add({ id, ...game }) {
 		if (this.games[id]) throw new Error('Game ID must be unique.');
-		this.games[id] = {
-			settlements: [],
-			lastPlayed: null,
-			created: new Date(),
-			...game,
+		this.games = {
+			...this.games,
+			[id]: {
+				settlements: [],
+				lastPlayed: null,
+				created: new Date(),
+				...game,
+			},
 		};
-		this.save();
+		return this;
+	},
+
+	remove(id) {
+		this.games = Object.fromEntries(Object.entries(this.games).filter(([k]) => k !== id));
 		return this;
 	},
 };

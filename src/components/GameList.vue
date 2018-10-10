@@ -10,6 +10,12 @@
 					{{ data.item.id }}
 				</router-link>
 			</template>
+
+			<template slot="actions" slot-scope="data">
+				<b-button @click="deleteGame(data.item.id)" variant="danger">
+					Delete
+				</b-button>
+			</template>
 		</b-table>
 
 		<p v-else>
@@ -25,7 +31,7 @@ import gameStorage from '@/storage/games';
 export default {
 	data() {
 		return {
-			games: gameStorage.games,
+			storage: gameStorage,
 			fields: [
 				{ key: 'id', label: 'ID' },
 				{
@@ -42,11 +48,16 @@ export default {
 						return value ? value.toLocaleString() : 'Not started';
 					}
 				},
+				'actions',
 			],
 		};
 	},
 
 	computed: {
+		games() {
+			return this.storage.games;
+		},
+
 		items() {
 			return Object.entries(this.games)
 				.map(([id, game]) => ({ id, ...game }))
@@ -57,6 +68,12 @@ export default {
 					if (a.created > b.created) return -1;
 					return 0;
 				});
+		},
+	},
+
+	methods: {
+		deleteGame(id) {
+			gameStorage.remove(id);
 		},
 	},
 };

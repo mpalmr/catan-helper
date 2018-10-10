@@ -1,6 +1,6 @@
 <template>
 	<b-container>
-		<GameList v-if="games.length" :games="games" />
+		<GameList />
 
 		<b-button to="/new" variant="success">
 			New Game
@@ -13,12 +13,6 @@
 import GameList from '@/components/GameList.vue';
 
 export default {
-	data() {
-		return {
-			games: JSON.parse(localStorage.getItem('games')) || [],
-		};
-	},
-
 	components: { GameList },
 };
 </script>

@@ -1,15 +1,16 @@
 <template>
 	<b-container>
+		<DiceRoll v-if="hasMinimumSettlements" />
+
+		<h1>Settlements</h1>
 		<ul class="settlements">
 			<li v-for="settlement in settlements" :key="settlement.id">
 				<settlement v-bind="settlement" />
 			</li>
 		</ul>
 
-		<!-- <DiceRoll /> -->
-
-		<b-button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements" variant="warning">
-			{{ createSettlementButtonText }}
+		<b-button @click="toggleCreateSettlement" v-if="hasMinimumSettlements" variant="warning">
+			{{ this.isCreatingSettlement ? 'Cancel' : 'Create Settlement' }}
 		</b-button>
 
 		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
@@ -37,10 +38,6 @@ export default {
 
 		isCreatingSettlement() {
 			return !this.hasMinimumSettlements || this.isCreatingSettlementToggled;
-		},
-
-		createSettlementButtonText() {
-			return this.isCreatingSettlement ? 'Cancel' : 'Create Settlement';
 		},
 	},
 

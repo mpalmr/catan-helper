@@ -6,8 +6,7 @@
 
 		<ul>
 			<li v-for="(resource, i) in resources" :key="resource.id">
-				<label>
-					Type:
+				<input-wrap :error="resource.errors.type" label="Type">
 					<select v-model="resource.type">
 						<option disabled selected :value="null">
 							Select...
@@ -20,18 +19,11 @@
 							{{ resourceType.name }}
 						</option>
 					</select>
-					<span v-if="resource.errors.type" class="error">
-						{{ resource.errors.type }}
-					</span>
-				</label>
+				</input-wrap>
 
-				<label>
-					Dice Number:
+				<input-wrap :error="resource.errors.diceNumber" label="Dice Number">
 					<input v-model.number="resource.diceNumber" type="number" min="2" max="12" step="1" />
-					<span v-if="resource.errors.diceNumber" class="error">
-						{{ resource.errors.diceNumber }}
-					</span>
-				</label>
+				</input-wrap>
 
 				<button v-if="i > 0" @click="removeResource(resource.id)" type="button">
 					Remove
@@ -55,6 +47,7 @@
 
 <script>
 import uuid from 'uuid/v4';
+import InputWrap from './input/Wrap.vue';
 import { resources as resourceTypes } from '../constants';
 
 function validateDiceNumber(diceNumber) {
@@ -137,13 +130,14 @@ export default {
 			this.resources = this.resources.filter(resource => resource.id !== id);
 		},
 	},
+
+	components: { InputWrap },
 };
 </script>
 
 
 <style lang="scss" scoped>
 @import "../sass/list";
-@import "../sass/colors";
 
 ul {
 	@extend %list-clear;
@@ -152,19 +146,5 @@ ul {
 	> li {
 		margin-top: 1.5em;
 	}
-}
-
-label {
-	display: flex;
-	flex-direction: column;
-	&:not(:first-child) {
-		margin-top: 2em;
-	}
-}
-
-.error {
-	margin-top: .5em;
-	font-size: .8em;
-	color: $color-error;
 }
 </style>

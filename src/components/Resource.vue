@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<img :src="imgSrc" :alt="type">
+		<img :src="images[type]" :alt="type">
 		<span class="dice-number">
 			{{ diceNumber }}
 		</span>
@@ -15,12 +15,6 @@ export default {
 	props: {
 		type: { type: String, required: true },
 		diceNumber: { type: Number, required: true },
-	},
-
-	computed: {
-		imgSrc() {
-			return images[this.type];
-		},
 	},
 };
 </script>

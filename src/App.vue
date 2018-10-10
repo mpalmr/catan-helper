@@ -6,9 +6,9 @@
 			</li>
 		</ul>
 
-		<Button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements">
+		<b-button @click="toggleCreateSettlement" :disabled="!hasMinimumSettlements" variant="warning">
 			{{ createSettlementButtonText }}
-		</Button>
+		</b-button>
 
 		<CreateSettlement v-if="isCreatingSettlement" :createSettlement="createSettlement" />
 	</div>
@@ -16,9 +16,8 @@
 
 
 <script>
-import Settlement from './components/Settlement.vue';
-import CreateSettlement from './components/CreateSettlement.vue';
-import Button from './components/Button.vue';
+import Settlement from './components/Settlement';
+import CreateSettlement from './components/CreateSettlement';
 
 export default {
 	name: 'app',
@@ -54,17 +53,12 @@ export default {
 		},
 	},
 
-	components: { Settlement, CreateSettlement, Button },
+	components: { Settlement, CreateSettlement },
 };
 </script>
 
 <style lang="scss">
 @import "./sass/list";
-
-body {
-	margin: 0;
-	font-family: Helvetica, Arial, sans-serif;
-}
 
 .settlements {
 	@extend %list-clear;

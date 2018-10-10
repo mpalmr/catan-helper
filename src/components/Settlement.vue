@@ -2,9 +2,9 @@
 	<div>
 		<img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
 
-		<Button v-if="!isCity" @click="upgradeToCity">
+		<b-button v-if="!isCity" @click="upgradeToCity">
 			Upgrade
-		</Button>
+		</b-button>
 
 		<ul>
 			<li v-for="resource in resources" :key="resource.id">
@@ -16,8 +16,7 @@
 
 
 <script>
-import Resource from './Resource.vue';
-import Button from './Button.vue';
+import Resource from './Resource';
 import townImage from '../assets/images/town.png';
 import cityImage from '../assets/images/city.png';
 
@@ -43,7 +42,7 @@ export default {
 		},
 	},
 
-	components: { Resource, Button },
+	components: { Resource },
 };
 </script>
 

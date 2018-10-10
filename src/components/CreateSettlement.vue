@@ -25,34 +25,29 @@
 					<input v-model.number="resource.diceNumber" type="number" min="2" max="12" step="1" />
 				</InputWrap>
 
-				<Button v-if="i > 0" @click="removeResource(resource.id)" type="button">
+				<b-button v-if="i > 0" @click="removeResource(resource.id)">
 					Remove
-				</Button>
+				</b-button>
 			</li>
 		</ul>
 
-		<Button
-			@click="addResource"
-			:disabled="this.resources.length >= 3"
-			type="button"
-		>
+		<b-button @click="addResource" :disabled="this.resources.length >= 3" variant="info">
 			Add Resource
-		</Button>
+		</b-button>
 
-		<Button @click="reset" type="button" theme="warning">
+		<b-button @click="reset" type="button" variant="warning">
 			Reset
-		</Button>
-		<Button type="submit" theme="success">
+		</b-button>
+		<b-button type="submit" variant="success">
 			Create
-		</Button>
+		</b-button>
 	</form>
 </template>
 
 
 <script>
 import uuid from 'uuid/v4';
-import Button from './Button.vue';
-import InputWrap from './input/Wrap.vue';
+import InputWrap from './input/Wrap';
 import { resources as resourceTypes } from '../constants';
 
 function validateDiceNumber(diceNumber) {
@@ -129,7 +124,7 @@ export default {
 		},
 	},
 
-	components: { Button, InputWrap },
+	components: { InputWrap },
 };
 </script>
 

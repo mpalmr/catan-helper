@@ -1,5 +1,5 @@
 <template>
-	<b-container>
+	<v-container>
 		<DiceRoll v-if="hasMinimumSettlements" :settlements="settlements" />
 
 		<h1>Settlements</h1>
@@ -9,12 +9,12 @@
 			</li>
 		</ul>
 
-		<b-button @click="toggleCreate" v-if="hasMinimumSettlements" variant="warning">
+		<v-btn @click="toggleCreate" v-if="hasMinimumSettlements" variant="warning">
 			{{ this.isCreating ? 'Cancel' : 'Create Settlement' }}
-		</b-button>
+		</v-btn>
 
 		<CreateSettlement v-if="isCreating" :createSettlement="createSettlement" />
-	</b-container>
+	</v-container>
 </template>
 
 

@@ -1,10 +1,10 @@
 <template>
 	<div class="container">
-		<b-img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
+		<v-img :src="imgSrc" :alt="this.isCity ? 'City' : 'Town'" />
 
-		<b-button v-if="!isCity" @click="upgrade">
+		<v-btn v-if="!isCity" @click="upgrade">
 			Upgrade
-		</b-button>
+		</v-btn>
 
 		<ul>
 			<li v-for="resource in resources" :key="resource.id">

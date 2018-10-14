@@ -4,9 +4,9 @@
 			{{ diceRollResult }}
 		</h1>
 
-		<b-form @submit.prevent="onSubmit">
+		<v-form @submit.prevent="onSubmit">
 			<DiceRollInput v-model.number="diceRollInput" id="diceRoll" />
-		</b-form>
+		</v-form>
 
 		<div v-if="resourcesGained.length">
 			<h2>Cards Gained</h2>

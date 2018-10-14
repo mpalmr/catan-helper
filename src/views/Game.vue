@@ -19,7 +19,7 @@
 
 
 <script>
-import { getGame } from '@/storage';
+import savedGames from '@/saved-games';
 import DiceRoll from '@/components/DiceRoll';
 import Settlement from '@/components/Settlement';
 import CreateSettlement from '@/components/CreateSettlement';
@@ -27,7 +27,7 @@ import CreateSettlement from '@/components/CreateSettlement';
 export default {
 	data() {
 		return {
-			settlements: getGame().settlements,
+			settlements: savedGames.games.settlements,
 			isCreatingToggled: false,
 		};
 	},

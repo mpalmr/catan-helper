@@ -12,27 +12,17 @@
 
 
 <script>
-import { getGame } from '@/storage';
-export default {
-	data() {
-		return { game: getGame() };
-	},
+import savedGames from '@/saved-games';
 
+export default {
 	methods: {
-		continueGame() {
-			localStorage.setItem('game', JSON.stringify({
-				...this.game,
-				modified: new Date(),
-			}));
+		newGame() {
+			savedGames.new();
 			this.$router.push('/play');
 		},
 
-		newGame() {
-			localStorage.setItem('game', JSON.stringify({
-				settlements: [],
-				created: new Date(),
-				modified: new Date(),
-			}));
+		continueGame() {
+			savedGames.continue();
 			this.$router.push('/play');
 		},
 	},

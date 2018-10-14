@@ -1,13 +1,9 @@
 <template>
-	<b-container>
-		<b-button v-if="game" @click="continueGame" variant="success">
-			Continue
-		</b-button>
-
-		<b-button @click="newGame" variant="warning">
+	<v-container>
+		<v-btn @click="newGame" variant="warning">
 			New Game
-		</b-button>
-	</b-container>
+		</v-btn>
+	</v-container>
 </template>
 
 

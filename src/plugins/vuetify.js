@@ -9,16 +9,17 @@ import {
 	VIcon,
 	VGrid,
 	VToolbar,
+	VDataTable,
+	VAlert,
 	transitions,
 } from 'vuetify';
 import 'vuetify/src/stylus/app.styl';
-import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.use(Vuetify, {
-	customProperties: true,
-	iconfont: 'md',
 	components: {
+		customProperties: true,
+		iconfont: 'md',
 		VApp,
 		VNavigationDrawer,
 		VFooter,
@@ -27,6 +28,8 @@ Vue.use(Vuetify, {
 		VIcon,
 		VGrid,
 		VToolbar,
+		VDataTable,
+		VAlert,
 		transitions,
 	},
 });

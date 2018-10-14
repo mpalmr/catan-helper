@@ -1,18 +1,18 @@
-<template>
+<template functional>
 	<v-app>
-		<main-header />
+		<router-view />
 
-		<main>
-			<router-view />
-		</main>
+		<v-footer color="primary" dark absolute>
+			<v-layout justify-center>
+				<h1>Catan Buddy</h1>
+			</v-layout>
+		</v-footer>
 	</v-app>
 </template>
 
 
-<script>
-import MainHeader from '@/components/MainHeader.vue';
-
-export default {
-	components: { MainHeader },
-};
-</script>
+<style lang="scss" scoped>
+h1 {
+	font-size: 1.5rem;
+}
+</style>

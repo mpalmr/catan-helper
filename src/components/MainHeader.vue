@@ -4,7 +4,7 @@
 			<v-toolbar-title>{{ title }}</v-toolbar-title>
 			<v-spacer />
 			<v-toolbar-items>
-				<v-btn to="/">Home</v-btn>
+				<slot />
 			</v-toolbar-items>
 		</v-toolbar>
 	</header>
@@ -13,8 +13,8 @@
 
 <script>
 export default {
-	data() {
-		return { title: this.$route.name === 'game' ? 'Playing' : 'Pick a Game' };
+	props: {
+		title: { type: String, required: true },
 	},
 };
 </script>

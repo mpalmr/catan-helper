@@ -11,6 +11,8 @@ import {
 	VToolbar,
 	VDataTable,
 	VAlert,
+	VForm,
+	VTextField,
 	transitions,
 } from 'vuetify';
 import 'vuetify/src/stylus/app.styl';
@@ -30,6 +32,8 @@ Vue.use(Vuetify, {
 		VToolbar,
 		VDataTable,
 		VAlert,
+		VForm,
+		VTextField,
 		transitions,
 	},
 });

@@ -11,7 +11,7 @@
 
 <script>
 import MainHeader from '@/components/MainHeader.vue';
-import NewGameForm from '@/components/new-game/Form.vue';
+import NewGameForm from '@/components/NewGameForm.vue';
 
 export default {
 	components: { MainHeader, NewGameForm },

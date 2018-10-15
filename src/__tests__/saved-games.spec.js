@@ -4,44 +4,59 @@ import savedGames from '../saved-games';
 jest.mock('uuid/v4');
 
 const LS_KEY = 'games';
-jest.spyOn(Date, 'now').mockImplementation(() => new Date('2010-01-01').getTime());
+
+beforeEach(() => {
+	jest.spyOn(Date, 'now').mockImplementation(() => new Date('2010-01-01').getTime());
+});
 
 afterEach(() => {
+	jest.resetAllMocks();
 	localStorage.clear();
 });
 
-test('new()', () => {
-	createUuid
-		.mockReturnValueOnce('mockId1')
-		.mockReturnValueOnce('mockId2');
+afterAll(() => {
+	jest.restoreAllMocks();
+});
 
-	const results = [{
-		id: 'mockId1',
+test('getAll()', () => {
+	const expected = [
+		{
+			id: 'id1',
+			name: 'name1',
+			settlements: [],
+			created: new Date(),
+			modified: new Date(),
+		},
+		{
+			id: 'id2',
+			name: 'name2',
+			settlements: [],
+			created: new Date(),
+			modified: new Date(),
+		},
+	];
+	expect(localStorage.getItem(LS_KEY)).toBeNull();
+	expect(savedGames.getAll()).toEqual([]);
+	localStorage.setItem(LS_KEY, JSON.stringify(expected));
+	expect(savedGames.getAll()).toEqual(expected);
+});
+
+test('new(name)', () => {
+	const expected = {
+		id: 'id1',
+		name: 'name1',
 		settlements: [],
 		created: new Date(Date.now()),
 		modified: new Date(Date.now()),
-	}];
-	expect(savedGames.new()).toEqual(results[0]);
-	expect(JSON.parse(localStorage.getItem(LS_KEY)))
-		.toEqual(results.map(({ created, modified, ...game }) => ({
-			...game,
-			created: created.toISOString(),
-			modified: modified.toISOString(),
-		})));
-
-	results.push({
-		id: 'mockId2',
-		settlements: [],
-		created: new Date(Date.now()),
-		modified: new Date(Date.now()),
-	});
-	expect(savedGames.new()).toEqual(results[1]);
-	expect(JSON.parse(localStorage.getItem(LS_KEY)))
-		.toEqual(results.map(({ created, modified, ...game }) => ({
-			...game,
-			created: created.toISOString(),
-			modified: modified.toISOString(),
-		})));
+	};
+	createUuid.mockReturnValueOnce('id1');
+	expect(savedGames.new).toThrow('Game requires a name');
+	expect(savedGames.new('name1')).toEqual(expected);
+	expect(JSON.parse(localStorage.getItem(LS_KEY))).toEqual([{
+		...expected,
+		created: expected.created.toJSON(),
+		modified: expected.modified.toJSON(),
+	}]);
 });
 
 describe('continue(id)', () => {
@@ -58,7 +73,6 @@ describe('continue(id)', () => {
 	});
 
 	test('sets "modified" on matching game and sets to localStorage', () => {
-		jest.spyOn(Date, 'now').mockImplementation(() => new Date('2010-01-01').getTime());
 		localStorage.setItem(LS_KEY, JSON.stringify([
 			{
 				id: 'mockId1',

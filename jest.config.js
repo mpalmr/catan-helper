@@ -1,6 +1,10 @@
 'use strict';
 
 module.exports = {
+	bail: true,
+	setupFiles: ['<rootDir>/tests/unit/setup.js'],
+
+	// @vue/cli
 	moduleFileExtensions: [
 		'js',
 		'jsx',
@@ -22,5 +26,4 @@ module.exports = {
 		'**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
 	],
 	testURL: 'http://localhost/',
-	verbose: true,
 };

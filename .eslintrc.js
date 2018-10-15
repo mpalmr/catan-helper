@@ -20,7 +20,11 @@ module.exports = {
 			env: { jest: true },
 		},
 		{
-			files: ['babel.config.js', 'jest.config.js', 'vue.config.js'],
+			files: [
+				'babel.config.js',
+				'vue.config.js',
+				'jest.config.js',
+			],
 			parserOptions: { sourceType: 'script' },
 		},
 	],

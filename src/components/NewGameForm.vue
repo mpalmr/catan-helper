@@ -1,12 +1,13 @@
 <template>
 	<v-container>
-		<v-form @submit.prevent="onSubmit">
+		<v-form @submit.prevent="handleSubmit" lazy-validation>
 			<v-layout row wrap>
 				<v-flex xs12>
 					<v-text-field
-						v-model="name"
+						v-model.trim="name"
+						@input="$v.name.$touch()"
 						@blur="$v.name.$touch()"
-						:error-messages="nameErrors"
+						:error-messages="getNameErrors()"
 						label="Name"
 						required
 					/>
@@ -37,28 +38,29 @@ export default {
 		name: {
 			required,
 			isUnique(value) {
-				return !savedGames.getAll().map(game => game.name).includes(value);
+				return !savedGames.getAll()
+					.map(game => game.name)
+					.includes(value);
 			},
 		},
 	},
 
-	computed: {
-		nameErrors() {
-			const errors = [];
-			if (!this.$v.name.$dirty) return errors;
-			if (!this.$v.name.required) errors.push('Required');
-			if (!this.$v.name.isUnique) errors.push('Name must be unique');
-			return errors;
-		},
-	},
-
 	methods: {
-		onSubmit() {
+		handleSubmit() {
 			this.$v.$touch();
 			if (!this.$v.$invalid) {
 				const { id } = savedGames.new(this.name);
 				this.$router.push(`/game/${id}`);
 			}
+		},
+
+		// Validation
+		getNameErrors() {
+			const errors = [];
+			if (!this.$v.name.$dirty) return errors;
+			!this.$v.name.required && errors.push('Required');
+			!this.$v.name.isUnique && errors.push('Name must be unique');
+			return errors;
 		},
 	},
 };

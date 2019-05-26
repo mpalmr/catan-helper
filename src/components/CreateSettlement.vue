@@ -1,5 +1,5 @@
 <template>
-	<b-form @submit.prevent="onSubmit" @reset="onReset">
+	<v-form @submit.prevent="onSubmit" @reset="onReset">
 		<h1>
 			Create Settlement
 		</h1>
@@ -14,22 +14,22 @@
 
 				<DiceRollInput v-model.number="resource.diceRoll" :id="`diceRoll_${resource.id}`" />
 
-				<b-button @click="removeResource(resource.id)" v-if="i > 0">
+				<v-btn @click="removeResource(resource.id)" v-if="i > 0">
 					Remove
-				</b-button>
+				</v-btn>
 			</li>
 		</ul>
 
-		<b-button @click="addResource" :disabled="this.resources.length >= 3" variant="info">
+		<v-btn @click="addResource" :disabled="this.resources.length >= 3" variant="info">
 			Add Resource
-		</b-button>
-		<b-button type="reset" variant="warning">
+		</v-btn>
+		<v-btn type="reset" variant="warning">
 			Reset
-		</b-button>
-		<b-button type="submit" variant="success">
+		</v-btn>
+		<v-btn type="submit" variant="success">
 			Create
-		</b-button>
-	</b-form>
+		</v-btn>
+	</v-form>
 </template>
 
 

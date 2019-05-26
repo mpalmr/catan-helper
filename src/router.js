@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import NewGame from './views/NewGame.vue';
 import Game from './views/Game.vue';
 
 Vue.use(Router);
@@ -15,7 +16,12 @@ export default new Router({
 			component: Home,
 		},
 		{
-			path: '/play',
+			path: '/new',
+			name: 'newGame',
+			component: NewGame,
+		},
+		{
+			path: '/game/:id',
 			name: 'game',
 			component: Game,
 		},

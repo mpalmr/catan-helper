@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<b-img :src="imgSrc" :alt="type" />
+		<v-img :src="imgSrc" :alt="type" />
 		<span class="dice-roll">
 			{{ diceRoll }}
 		</span>

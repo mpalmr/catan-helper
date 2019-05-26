@@ -1,40 +1,23 @@
 <template>
-	<b-container>
-		<b-button v-if="game" @click="continueGame" variant="success">
-			Continue
-		</b-button>
+	<div>
+		<main-header title="Start a Game">
+			<v-btn to="/new">New Game</v-btn>
+		</main-header>
 
-		<b-button @click="newGame" variant="warning">
-			New Game
-		</b-button>
-	</b-container>
+		<main>
+			<section>
+				<saved-games />
+			</section>
+		</main>
+	</div>
 </template>
 
 
 <script>
-import { getGame } from '@/storage';
+import MainHeader from '@/components/MainHeader.vue';
+import SavedGames from '@/components/SavedGames.vue';
+
 export default {
-	data() {
-		return { game: getGame() };
-	},
-
-	methods: {
-		continueGame() {
-			localStorage.setItem('game', JSON.stringify({
-				...this.game,
-				modified: new Date(),
-			}));
-			this.$router.push('/play');
-		},
-
-		newGame() {
-			localStorage.setItem('game', JSON.stringify({
-				settlements: [],
-				created: new Date(),
-				modified: new Date(),
-			}));
-			this.$router.push('/play');
-		},
-	},
+	components: { MainHeader, SavedGames },
 };
 </script>

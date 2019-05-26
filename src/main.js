@@ -1,13 +1,14 @@
+import '@babel/polyfill';
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
-import 'bootstrap/dist/css/bootstrap.css'; // eslint-disable-line
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import Vuelidate from 'vuelidate';
 import './polyfills';
+import './plugins/vuetify';
 import App from './App.vue';
 import router from './router';
 
 Vue.config.productionTip = false;
-Vue.use(BootstrapVue);
+
+Vue.use(Vuelidate);
 
 new Vue({
 	router,
